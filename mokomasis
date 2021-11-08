@@ -1,0 +1,21 @@
+class Knyga:
+    pasiekiama = True
+
+    def __init__(self, knygosPavadinimas, autorius, metai):
+        self.knygosPavadinimas = knygosPavadinimas
+        self.autorius = autorius
+        self.metai = metai
+
+
+    def sukurkKopija(self):
+        return Knyga(self.knygosPavadinimas, self.autorius, self.metai)
+
+    def pasiskolint(self):
+        self.pasiekiama = False
+
+
+k1 = Knyga("abadas", "abadejus", 2010)
+k2 = k1.sukurkKopija()
+k2.pasiskolint()
+print("k1 {} {} {} {}".format(k1.pasiekiama, k1.knygosPavadinimas, k1.autorius, k1.metai))
+print("k2 {} {} {} {}".format(k2.pasiekiama, k2.knygosPavadinimas, k2.autorius, k2.metai))
