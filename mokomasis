@@ -1,5 +1,6 @@
+
 class Knyga:
-    pasiekiama = True
+    pasiekiama = "Pasiekiama"
 
     def __init__(self, knygosPavadinimas, autorius, metai):
         self.knygosPavadinimas = knygosPavadinimas
@@ -7,15 +8,59 @@ class Knyga:
         self.metai = metai
 
 
-    def sukurkKopija(self):
+    def kopijuot(self):
         return Knyga(self.knygosPavadinimas, self.autorius, self.metai)
 
     def pasiskolint(self):
-        self.pasiekiama = False
+        self.pasiekiama = "Uzimta"
+
+    def grazinti(self):
+        self.pasiekiama = "Pasiekiama"
+
+    def rodyk(self):
+        return f"{self.knygosPavadinimas} {self.autorius} {self.metai} {self.pasiekiama}"
 
 
-k1 = Knyga("abadas", "abadejus", 2010)
-k2 = k1.sukurkKopija()
-k2.pasiskolint()
-print("k1 {} {} {} {}".format(k1.pasiekiama, k1.knygosPavadinimas, k1.autorius, k1.metai))
-print("k2 {} {} {} {}".format(k2.pasiekiama, k2.knygosPavadinimas, k2.autorius, k2.metai))
+
+class Biblioteka:
+    def __init__(self):
+        self.knygos = []
+
+    def sukurkKopija(self,Knyga):
+        self.knygos.append(Knyga)
+        self.knygos = sorted(self.knygos, key=lambda x: (x.knygosPavadinimas, x.autorius, -x.metai))
+
+    def get(self):
+        return self.knygos
+
+    def rodyk(self):
+        # This is one possible example how you can print all books
+        print("rodau")
+        for knyga in self.knygos:
+            print(knyga.rodyk())
+
+    def paieska(self,pavadinimas):
+        sarasas = []
+        for knyga in self.knygos:
+            if knyga.knygosPavadinimas == pavadinimas or knyga.autorius == pavadinimas:
+                sarasas.append(knyga.rodyk())
+        if sarasas:
+            print(sarasas)
+        else:
+            print("--------sarasas tuscias--------")
+
+b1 = Biblioteka()
+
+b1.sukurkKopija(Knyga("Alain Mabanckou ", "Broken Glass", 2009))
+b1.sukurkKopija(Knyga("Alain Mabanckou ", "Broken Glass", 2005))
+b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2005))
+b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2008))
+b1.sukurkKopija(Knyga("Alain Mabanckou", "Broken Glass", 2009))
+b1.sukurkKopija(Knyga("Alain Mabanckou", "Broken Glass", 2005))
+b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2005))
+b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2008))
+b1.knygos[0].pasiskolint()
+b1.knygos[5].pasiskolint()
+b1.knygos[2].pasiskolint()
+b1.rodyk()
+b1.paieska("Alain Mabanckou")
