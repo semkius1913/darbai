@@ -1,4 +1,3 @@
-
 class Knyga:
     pasiekiama = "Pasiekiama"
 
@@ -6,7 +5,6 @@ class Knyga:
         self.knygosPavadinimas = knygosPavadinimas
         self.autorius = autorius
         self.metai = metai
-
 
     def kopijuot(self):
         return Knyga(self.knygosPavadinimas, self.autorius, self.metai)
@@ -21,13 +19,12 @@ class Knyga:
         return f"{self.knygosPavadinimas} {self.autorius} {self.metai} {self.pasiekiama}"
 
 
-
 class Biblioteka:
     def __init__(self):
         self.knygos = []
 
-    def sukurkKopija(self,Knyga):
-        self.knygos.append(Knyga)
+    def sukurkKopija(self, knyga):
+        self.knygos.append(knyga)
         self.knygos = sorted(self.knygos, key=lambda x: (x.knygosPavadinimas, x.autorius, -x.metai))
 
     def get(self):
@@ -35,32 +32,17 @@ class Biblioteka:
 
     def rodyk(self):
         # This is one possible example how you can print all books
-        print("rodau")
+        sarasas = []
         for knyga in self.knygos:
-            print(knyga.rodyk())
+            sarasas.append(knyga.rodyk())
+        return sarasas
 
-    def paieska(self,pavadinimas):
+    def paieska(self, pavadinimas):
         sarasas = []
         for knyga in self.knygos:
             if knyga.knygosPavadinimas == pavadinimas or knyga.autorius == pavadinimas:
                 sarasas.append(knyga.rodyk())
         if sarasas:
-            print(sarasas)
+            return sarasas
         else:
-            print("--------sarasas tuscias--------")
-
-b1 = Biblioteka()
-
-b1.sukurkKopija(Knyga("Alain Mabanckou ", "Broken Glass", 2009))
-b1.sukurkKopija(Knyga("Alain Mabanckou ", "Broken Glass", 2005))
-b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2005))
-b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2008))
-b1.sukurkKopija(Knyga("Alain Mabanckou", "Broken Glass", 2009))
-b1.sukurkKopija(Knyga("Alain Mabanckou", "Broken Glass", 2005))
-b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2005))
-b1.sukurkKopija(Knyga("Stieg Larsson", "The Girl With the Dragon Tattoo", 2008))
-b1.knygos[0].pasiskolint()
-b1.knygos[5].pasiskolint()
-b1.knygos[2].pasiskolint()
-b1.rodyk()
-b1.paieska("Alain Mabanckou")
+            return "--------sarasas tuscias--------"
